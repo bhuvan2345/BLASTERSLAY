@@ -1,287 +1,194 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>INDIAN BLANKOS</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif;}
-
 body{
-    background:#0b1220;
-    color:white;
+margin:0;
+font-family:Segoe UI;
+background:#0b1220;
+color:white;
 }
 
 /* HEADER */
 header{
-    display:flex;
-    justify-content:space-between;
-    padding:20px 50px;
-    background:#0f172a;
-    border-bottom:1px solid #1e293b;
+display:flex;
+justify-content:space-between;
+padding:20px 40px;
+background:#0f172a;
 }
-
-header h2{color:#3b82f6;}
-
-nav a{
-    margin-left:20px;
-    color:#cbd5e1;
-    text-decoration:none;
-}
-nav a:hover{color:#3b82f6;}
+header h1{color:#3b82f6;}
 
 /* HERO */
 .hero{
-    height:90vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+height:90vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
 }
 
-.hero h1{
-    font-size:70px;
-    color:#3b82f6;
+.hero h2{
+font-size:70px;
+color:#3b82f6;
 }
 
 .hero p{
-    margin-top:10px;
-    color:#94a3b8;
+color:#94a3b8;
 }
 
 /* SEARCH */
 .search-box{
-    margin-top:30px;
-    width:60%;
-    max-width:600px;
+margin-top:30px;
+width:60%;
+max-width:600px;
 }
 
 .search-box input{
-    width:100%;
-    padding:15px;
-    border-radius:5px;
-    border:none;
+width:100%;
+padding:15px;
+border-radius:5px;
+border:none;
 }
 
 /* SUGGESTIONS */
 .suggestions{
-    background:#1e293b;
-    margin-top:5px;
-    border-radius:5px;
-    max-height:200px;
-    overflow:auto;
+background:#1e293b;
+border-radius:5px;
+margin-top:5px;
+max-height:200px;
+overflow:auto;
 }
 
 .suggestions div{
-    padding:10px;
-    border-bottom:1px solid #334155;
-    cursor:pointer;
+padding:10px;
+cursor:pointer;
 }
 
 .suggestions div:hover{
-    background:#3b82f6;
-    color:black;
+background:#3b82f6;
+color:black;
 }
 
-/* RESULTS GRID */
+/* GRID */
 .results{
-    margin-top:30px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:20px;
-    padding:20px;
+margin-top:40px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:20px;
 }
 
 .card{
-    background:#1e293b;
-    border-radius:10px;
-    overflow:hidden;
-    text-align:center;
+background:#1e293b;
+border-radius:10px;
+overflow:hidden;
 }
 
 .card img{
-    width:100%;
-    height:250px;
-    object-fit:cover;
+width:100%;
+height:300px;
+object-fit:cover;
 }
 
 .card h4{
-    padding:10px;
+padding:10px;
 }
-
-/* SECTION */
-.section{
-    padding:60px 30px;
-    text-align:center;
-}
-
-/* MAP */
-.map svg{
-    width:80%;
-    max-width:700px;
-}
-
-.state{
-    fill:#1e293b;
-    stroke:#475569;
-    cursor:pointer;
-}
-
-.state:hover{
-    fill:#3b82f6;
-}
-
-.active{
-    fill:#0ea5e9 !important;
-}
-
 </style>
 </head>
 
 <body>
 
 <header>
-<h2>INDIAN BLANKOS</h2>
-<nav>
-<a href="#">Home</a>
-<a href="#engine">Engine</a>
-<a href="#map">Karnataka Map</a>
-</nav>
+<h1>INDIAN BLANKOS</h1>
 </header>
 
-<!-- HERO -->
 <section class="hero">
-<h1>INDIAN BLANKOS</h1>
+<h2>INDIAN BLANKOS</h2>
 <p>Directors spark of thought to crafting reality</p>
 
 <div class="search-box">
-<input id="searchBox" placeholder="Search directors or movies...">
+<input id="search" placeholder="Search directors or movies...">
 <div id="suggestions" class="suggestions"></div>
 </div>
 
 <div id="results" class="results"></div>
 </section>
 
-<!-- MISSION -->
-<section class="section">
-<h2>Our Mission</h2>
+<section style="padding:40px;text-align:center;">
+<h2 style="color:#3b82f6;">Our Mission</h2>
 <p>
-INDIAN BLANKOS connects cinema intelligence across India.
-From directors to filmographies, we map creativity and storytelling.
+INDIAN BLANKOS connects Indian cinema at scale — mapping directors, movies, and creativity across industries.
 </p>
-</section>
-
-<!-- KARNATAKA MAP -->
-<section class="section" id="map">
-<h2>Karnataka Film Explorer</h2>
-
-<div class="map">
-<svg viewBox="0 0 400 400">
-
-<!-- Sample districts (replace with full SVG later) -->
-<path id="bangalore" class="state" d="M200 250 L250 250 L250 300 L200 300 Z"/>
-<path id="mysore" class="state" d="M150 300 L200 300 L200 350 L150 350 Z"/>
-<path id="hubli" class="state" d="M100 200 L150 200 L150 250 L100 250 Z"/>
-
-</svg>
-</div>
-
-<div id="mapResults" class="results"></div>
-
 </section>
 
 <script>
 
-/* DIRECTOR DATA */
-const data=[
-{
-name:"S. S. Rajamouli",
-movies:[
-{title:"RRR",img:"https://upload.wikimedia.org/wikipedia/en/d/d7/RRR_Poster.jpg"},
-{title:"Baahubali",img:"https://upload.wikimedia.org/wikipedia/en/5/5f/Baahubali_The_Beginning_poster.jpg"}
-]
-},
-{
-name:"Rajkumar Hirani",
-movies:[
-{title:"3 Idiots",img:"https://upload.wikimedia.org/wikipedia/en/d/df/3_idiots_poster.jpg"},
-{title:"PK",img:"https://upload.wikimedia.org/wikipedia/en/c/c3/PK_poster.jpg"}
-]
-}
+/* MASS DATA SIMULATION (LIKE 100K SCALE STRUCTURE) */
+const directors = [];
+
+// sample real + auto-generated expansion
+const base = [
+{ name:"S. S. Rajamouli", movies:["RRR","Baahubali","Eega"] },
+{ name:"Rajkumar Hirani", movies:["3 Idiots","PK","Sanju"] },
+{ name:"Mani Ratnam", movies:["Roja","Guru","Bombay"] },
+{ name:"Lokesh Kanagaraj", movies:["Vikram","Kaithi","Leo"] },
+{ name:"Anurag Kashyap", movies:["Gangs of Wasseypur","Ugly"] }
 ];
 
-const searchBox=document.getElementById("searchBox");
-const suggestions=document.getElementById("suggestions");
-const results=document.getElementById("results");
+// expand to simulate large dataset
+for(let i=0;i<2000;i++){
+base.forEach(d=>{
+directors.push({
+name:d.name+" "+i,
+movies:d.movies.map(m=>({
+title:m+" "+i,
+poster:"https://via.placeholder.com/300x450?text="+m
+}))
+});
+});
+}
 
 /* SEARCH */
-searchBox.addEventListener("input",()=>{
-let val=searchBox.value.toLowerCase();
-suggestions.innerHTML="";
+const input=document.getElementById("search");
+const sug=document.getElementById("suggestions");
+const res=document.getElementById("results");
 
-if(!val)return;
+input.addEventListener("input",()=>{
+let val=input.value.toLowerCase();
+sug.innerHTML="";
 
-data.filter(d=>d.name.toLowerCase().includes(val))
-.forEach(d=>{
+if(!val) return;
+
+let matches=directors.filter(d=>
+d.name.toLowerCase().includes(val) ||
+d.movies.some(m=>m.title.toLowerCase().includes(val))
+).slice(0,10);
+
+matches.forEach(d=>{
 let div=document.createElement("div");
-div.innerHTML=`<b>${d.name}</b>`;
-div.onclick=()=>selectDirector(d);
-suggestions.appendChild(div);
+div.innerHTML=`<b>${d.name}</b><br><small>${d.movies[0].title}</small>`;
+div.onclick=()=>showMovies(d);
+sug.appendChild(div);
 });
 });
 
-function selectDirector(d){
-suggestions.innerHTML="";
-searchBox.value=d.name;
-
-results.innerHTML="";
+function showMovies(d){
+input.value=d.name;
+sug.innerHTML="";
+res.innerHTML="";
 
 d.movies.forEach(m=>{
-results.innerHTML+=`
+res.innerHTML+=`
 <div class="card">
-<img src="${m.img}">
+<img src="${m.poster}">
 <h4>${m.title}</h4>
 </div>`;
 });
 }
-
-/* MAP DATA */
-const mapData={
-bangalore:[
-{title:"KGF",img:"https://upload.wikimedia.org/wikipedia/en/5/5e/KGF_Chapter_1_poster.jpg"},
-{title:"Kantara",img:"https://upload.wikimedia.org/wikipedia/en/5/50/Kantara_poster.jpg"},
-{title:"RRR",img:"https://upload.wikimedia.org/wikipedia/en/d/d7/RRR_Poster.jpg"}
-],
-mysore:[
-{title:"Lucia",img:"https://upload.wikimedia.org/wikipedia/en/3/3c/Lucia_poster.jpg"}
-],
-hubli:[
-{title:"Ugramm",img:"https://upload.wikimedia.org/wikipedia/en/5/5e/Ugramm_poster.jpg"}
-]
-};
-
-/* MAP CLICK */
-document.querySelectorAll(".state").forEach(s=>{
-s.onclick=()=>{
-document.querySelectorAll(".state").forEach(x=>x.classList.remove("active"));
-s.classList.add("active");
-
-let movies=mapData[s.id]||[];
-let html="";
-
-movies.forEach(m=>{
-html+=`
-<div class="card">
-<img src="${m.img}">
-<h4>${m.title}</h4>
-</div>`;
-});
-
-document.getElementById("mapResults").innerHTML=html;
-};
-});
 
 </script>
 
