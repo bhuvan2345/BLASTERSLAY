@@ -7,8 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
-margin:0;
 font-family:'Poppins',sans-serif;
 background:#0b1220;
 color:white;
@@ -18,82 +18,106 @@ color:white;
 header{
 display:flex;
 justify-content:space-between;
-padding:20px 50px;
+align-items:center;
+padding:20px 60px;
 background:#0f172a;
 position:sticky;
 top:0;
-z-index:10;
 }
-header h1{color:#3b82f6;font-weight:600;}
+.logo{
+font-size:20px;
+font-weight:600;
+color:#3b82f6;
+}
 
 nav button{
-background:none;border:none;color:white;margin-left:20px;cursor:pointer;
+background:none;
+border:none;
+color:#cbd5e1;
+margin-left:25px;
+font-size:14px;
+cursor:pointer;
 }
 nav button:hover{color:#3b82f6;}
 
 /* SECTIONS */
-.section{display:none;padding:60px;}
+.section{display:none;padding:80px 60px;}
 .active{display:block;}
 
 /* HERO */
 .hero{
+max-width:900px;
+margin:auto;
 text-align:center;
 padding-top:120px;
 }
+
 .hero h1{
-font-size:72px;
+font-size:64px;
+font-weight:600;
 color:#3b82f6;
-margin-bottom:10px;
+letter-spacing:-1px;
 }
+
 .hero p{
-font-size:18px;
+margin-top:15px;
 color:#94a3b8;
+font-size:16px;
 }
 
 /* ICONS */
-.icons{
+.features{
 display:flex;
 justify-content:center;
-gap:60px;
-margin-top:50px;
+gap:80px;
+margin-top:60px;
 }
-.icon{
-width:50px;
-height:50px;
+
+.feature{
+text-align:center;
+}
+
+.feature svg{
+width:40px;
+height:40px;
 fill:#3b82f6;
+margin-bottom:10px;
 }
 
 /* SEARCH */
-.search-box{
-margin:40px auto;
-width:60%;
+.search-wrapper{
 max-width:700px;
+margin:60px auto 0;
 }
 
-.search-row{
+.search-bar{
 display:flex;
-gap:10px;
+background:#111827;
+border-radius:5px;
+overflow:hidden;
 }
 
-input{
+.search-bar input{
 flex:1;
-padding:14px;
-border-radius:5px;
+padding:16px;
 border:none;
+background:none;
+color:white;
+font-size:15px;
 }
 
-button{
+.search-bar button{
+padding:16px 20px;
 border:none;
-border-radius:5px;
-padding:14px;
 cursor:pointer;
+font-weight:500;
 }
 
 .search-btn{background:#3b82f6;color:white;}
 .clear-btn{background:#ef4444;color:white;}
 
 .suggestions{
-background:#1e293b;
+background:#111827;
 border-radius:5px;
 margin-top:5px;
 max-height:200px;
@@ -101,8 +125,10 @@ overflow:auto;
 }
 
 .suggestions div{
-padding:10px;
+padding:12px;
 cursor:pointer;
+font-size:14px;
+border-bottom:1px solid #1f2937;
 }
 
 .suggestions div:hover{
@@ -111,7 +137,18 @@ color:black;
 }
 
 /* RESULTS */
-.results{margin-top:30px;}
+.results{
+margin-top:50px;
+}
+
+.director{
+margin-bottom:40px;
+}
+
+.director h3{
+color:#3b82f6;
+margin-bottom:10px;
+}
 
 .grid{
 display:grid;
@@ -120,10 +157,13 @@ gap:12px;
 }
 
 .card{
-background:#1e293b;
+background:#111827;
 border-radius:5px;
 overflow:hidden;
+transition:0.2s;
 }
+
+.card:hover{transform:scale(1.03);}
 
 .card img{
 width:100%;
@@ -131,15 +171,17 @@ height:220px;
 object-fit:cover;
 }
 
-.card h4{
+.card p{
 padding:8px;
 font-size:13px;
 }
 
-.director-title{
-margin:20px 0 10px;
-color:#3b82f6;
-font-size:18px;
+/* FOOTER */
+.footer{
+text-align:center;
+margin-top:80px;
+color:#6b7280;
+font-size:13px;
 }
 </style>
 </head>
@@ -147,7 +189,7 @@ font-size:18px;
 <body>
 
 <header>
-<h1>INDIAN BLANKOS</h1>
+<div class="logo">INDIAN BLANKOS</div>
 <nav>
 <button onclick="showSection('home')">Home</button>
 <button onclick="showSection('engine')">Engine</button>
@@ -162,10 +204,23 @@ font-size:18px;
 <p>Directors spark of thought to crafting reality</p>
 </div>
 
-<div class="icons">
-<svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg>
-<svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 22h20z"/></svg>
-<svg class="icon" viewBox="0 0 24 24"><path d="M12 12l8-8H4z"/></svg>
+<div class="features">
+
+<div class="feature">
+<svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg>
+<p>Directors</p>
+</div>
+
+<div class="feature">
+<svg viewBox="0 0 24 24"><path d="M12 2L2 22h20z"/></svg>
+<p>Films</p>
+</div>
+
+<div class="feature">
+<svg viewBox="0 0 24 24"><path d="M12 12l8-8H4z"/></svg>
+<p>Discovery</p>
+</div>
+
 </div>
 
 </div>
@@ -173,11 +228,9 @@ font-size:18px;
 <!-- ENGINE -->
 <div id="engine" class="section">
 
-<h2 style="text-align:center;color:#3b82f6;">Search Engine</h2>
+<div class="search-wrapper">
 
-<div class="search-box">
-
-<div class="search-row">
+<div class="search-bar">
 <input id="search" placeholder="Search directors or movies...">
 <button class="search-btn" onclick="searchNow()">Search</button>
 <button class="clear-btn" onclick="clearAll()">Clear</button>
@@ -191,61 +244,51 @@ font-size:18px;
 
 </div>
 
+<div class="footer">
+INDIAN BLANKOS — Cinema Intelligence Platform
+</div>
+
 <script>
 
-/* NAV */
+/* NAVIGATION */
 function showSection(id){
 document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
 document.getElementById(id).classList.add("active");
 }
 
-/* 100 DIRECTORS DATA */
-const directors = [];
-
-const base = [
-"S. S. Rajamouli","Rajkumar Hirani","Mani Ratnam","Anurag Kashyap",
-"Lokesh Kanagaraj","Karan Johar","Zoya Akhtar","Rohit Shetty",
-"Sanjay Leela Bhansali","Priyadarshan"
-];
-
-const posters = [
-"https://upload.wikimedia.org/wikipedia/en/d/d7/RRR_Poster.jpg",
-"https://upload.wikimedia.org/wikipedia/en/d/df/3_idiots_poster.jpg",
-"https://upload.wikimedia.org/wikipedia/en/9/9f/Roja_film_poster.jpg",
-"https://upload.wikimedia.org/wikipedia/en/9/93/Vikram_2022_poster.jpg",
-"https://upload.wikimedia.org/wikipedia/en/4/4d/Kabhi_Khushi_Kabhie_Gham_poster.jpg"
-];
+/* DATA (100 directors clean) */
+const directors=[];
+const names=["Rajamouli","Hirani","Ratnam","Kashyap","Johar","Shetty","Akhtar","Bhansali","Shankar","Menon"];
 
 for(let i=0;i<100;i++){
 directors.push({
-name: base[i % base.length] + " " + i,
+name:"Director "+names[i%names.length]+" "+i,
 movies:[
-{title:"Film "+i, poster:posters[i % posters.length]},
-{title:"Cinema "+i, poster:posters[(i+1)%posters.length]},
-{title:"Story "+i, poster:posters[(i+2)%posters.length]}
+{title:"Film "+i,poster:"https://picsum.photos/300/450?random="+i},
+{title:"Cinema "+i,poster:"https://picsum.photos/300/450?random="+(i+100)},
+{title:"Story "+i,poster:"https://picsum.photos/300/450?random="+(i+200)}
 ]
 });
 }
 
 /* SEARCH */
-const input = document.getElementById("search");
-const sug = document.getElementById("suggestions");
-const res = document.getElementById("results");
+const input=document.getElementById("search");
+const sug=document.getElementById("suggestions");
+const res=document.getElementById("results");
 
-input.addEventListener("input", ()=>{
-let val = input.value.toLowerCase();
+input.addEventListener("input",()=>{
+let val=input.value.toLowerCase();
 sug.innerHTML="";
+if(!val)return;
 
-if(!val) return;
-
-let matches = directors.filter(d =>
+let matches=directors.filter(d=>
 d.name.toLowerCase().includes(val) ||
 d.movies.some(m=>m.title.toLowerCase().includes(val))
-).slice(0,10);
+).slice(0,8);
 
 matches.forEach(d=>{
 let div=document.createElement("div");
-div.innerHTML=`<b>${d.name}</b> — ${d.movies[0].title}`;
+div.innerText=d.name+" — "+d.movies[0].title;
 div.onclick=()=>{
 input.value=d.name;
 searchNow();
@@ -258,23 +301,22 @@ function searchNow(){
 let val=input.value.toLowerCase();
 res.innerHTML="";
 
-let results = directors.filter(d =>
+let results=directors.filter(d=>
 d.name.toLowerCase().includes(val) ||
 d.movies.some(m=>m.title.toLowerCase().includes(val))
 ).slice(0,5);
 
 results.forEach(d=>{
-res.innerHTML+=`<div class="director-title">${d.name}</div><div class="grid">`;
-
+let html=`<div class="director"><h3>${d.name}</h3><div class="grid">`;
 d.movies.forEach(m=>{
-res.innerHTML+=`
+html+=`
 <div class="card">
 <img src="${m.poster}">
-<h4>${m.title}</h4>
+<p>${m.title}</p>
 </div>`;
 });
-
-res.innerHTML+=`</div>`;
+html+=`</div></div>`;
+res.innerHTML+=html;
 });
 }
 
