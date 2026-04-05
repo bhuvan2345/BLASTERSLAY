@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INDIA BLANKOS</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #111;
+        color: white;
+    }
+
+    header {
+        background: #000;
+        padding: 20px;
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        color: #00ffcc;
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        background: #222;
+    }
+
+    nav button {
+        background: none;
+        border: none;
+        color: white;
+        padding: 15px 25px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    nav button:hover {
+        background: #00ffcc;
+        color: black;
+    }
+
+    .section {
+        display: none;
+        padding: 40px;
+    }
+
+    .active {
+        display: block;
+    }
+
+    input {
+        width: 60%;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+    }
+
+    .suggestions {
+        background: #222;
+        width: 60%;
+        margin: auto;
+        border-radius: 5px;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    .suggestions div {
+        padding: 10px;
+        cursor: pointer;
+        border-bottom: 1px solid #333;
+    }
+
+    .suggestions div:hover {
+        background: #00ffcc;
+        color: black;
+    }
+
+    .results {
+        margin-top: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>INDIA BLANKOS</header>
+
+<nav>
+    <button onclick="showSection('home')">Home</button>
+    <button onclick="showSection('engine')">Search Engine</button>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="section active">
+    <h2>Our Mission</h2>
+    <p>
+        INDIA BLANKOS is designed to organize and simplify access to Indian cinema knowledge.
+        Our goal is to map directors to their work, making it easier to explore filmographies,
+        discover patterns, and understand the depth of Indian filmmaking.
+    </p>
+</div>
+
+<!-- SEARCH ENGINE -->
+<div id="engine" class="section">
+    <h2>Search Director</h2>
+
+    <input type="text" id="searchBox" placeholder="Start typing director name...">
+    <div class="suggestions" id="suggestions"></div>
+
+    <div class="results" id="results"></div>
+</div>
+
+<script>
+
+// SAMPLE DATA (expand this to 1000+ directors later)
+const data = [
+    {
+        name: "S. S. Rajamouli",
+        movies: ["Baahubali", "RRR", "Eega", "Magadheera"]
+    },
+    {
+        name: "Mani Ratnam",
+        movies: ["Roja", "Bombay", "Guru", "Ponniyin Selvan"]
+    },
+    {
+        name: "Anurag Kashyap",
+        movies: ["Gangs of Wasseypur", "Ugly", "Black Friday"]
+    },
+    {
+        name: "Rajkumar Hirani",
+        movies: ["3 Idiots", "PK", "Sanju", "Munna Bhai MBBS"]
+    },
+    {
+        name: "Lokesh Kanagaraj",
+        movies: ["Kaithi", "Vikram", "Leo"]
+    },
+    {
+        name: "Zoya Akhtar",
+        movies: ["Gully Boy", "ZNMD", "Dil Dhadakne Do"]
+    }
+];
+
+const searchBox = document.getElementById("searchBox");
+const suggestions = document.getElementById("suggestions");
+const results = document.getElementById("results");
+
+// SHOW SECTIONS
+function showSection(section) {
+    document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+    document.getElementById(section).classList.add("active");
+}
+
+// SEARCH LOGIC
+searchBox.addEventListener("input", function() {
+    let input = this.value.toLowerCase();
+    suggestions.innerHTML = "";
+
+    if (!input) return;
+
+    let filtered = data.filter(d => d.name.toLowerCase().includes(input));
+
+    filtered.forEach(d => {
+        let div = document.createElement("div");
+        div.textContent = d.name;
+        div.onclick = () => selectDirector(d);
+        suggestions.appendChild(div);
+    });
+});
+
+// SELECT DIRECTOR
+function selectDirector(director) {
+    searchBox.value = director.name;
+    suggestions.innerHTML = "";
+
+    let html = `<h3>Movies by ${director.name}</h3><ul>`;
+    director.movies.forEach(m => {
+        html += `<li>${m}</li>`;
+    });
+    html += "</ul>";
+
+    results.innerHTML = html;
+}
+
+</script>
+
+</body>
+</html>
