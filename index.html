@@ -4,60 +4,134 @@
 <meta charset="UTF-8">
 <title>INDIAN BLANKOS</title>
 
-<style>
-body{margin:0;font-family:Segoe UI;background:#0b1220;color:white;}
+<!-- Poppins Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-header{
-display:flex;justify-content:space-between;align-items:center;
-padding:20px 40px;background:#0f172a;
-position:sticky;top:0;
+<style>
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:#0b1220;
+color:white;
 }
-header h1{color:#3b82f6;}
+
+/* HEADER */
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
+background:#0f172a;
+position:sticky;
+top:0;
+z-index:10;
+}
+header h1{
+color:#3b82f6;
+font-weight:600;
+}
 
 nav button{
-background:none;border:none;color:white;
-margin-left:20px;cursor:pointer;font-size:16px;
+background:none;
+border:none;
+color:white;
+margin-left:20px;
+cursor:pointer;
+font-size:15px;
+font-weight:400;
 }
 nav button:hover{color:#3b82f6;}
 
-.section{display:none;padding:40px;}
+/* SECTION CONTROL */
+.section{
+display:none;
+padding:40px;
+}
 .active{display:block;}
 
+/* HERO */
 .hero{
-height:70vh;display:flex;flex-direction:column;
-justify-content:center;align-items:center;text-align:center;
+height:75vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
 }
-.hero h2{font-size:70px;color:#3b82f6;}
-.hero p{color:#94a3b8;}
+.hero h2{
+font-size:64px;
+color:#3b82f6;
+font-weight:600;
+}
+.hero p{
+color:#94a3b8;
+margin-top:10px;
+}
 
+/* SEARCH */
 .search-box{
-margin-top:30px;width:60%;max-width:600px;
+margin-top:30px;
+width:60%;
+max-width:600px;
 }
+
 .search-box input{
-width:100%;padding:15px;border-radius:5px;border:none;
+width:100%;
+padding:14px;
+border-radius:5px;
+border:none;
+outline:none;
+font-family:'Poppins';
 }
 
+/* SUGGESTIONS */
 .suggestions{
-background:#1e293b;border-radius:5px;margin-top:5px;
-max-height:200px;overflow:auto;
+background:#1e293b;
+border-radius:5px;
+margin-top:5px;
+max-height:200px;
+overflow:auto;
 }
-.suggestions div{padding:10px;cursor:pointer;}
-.suggestions div:hover{background:#3b82f6;color:black;}
 
+.suggestions div{
+padding:10px;
+cursor:pointer;
+font-size:14px;
+}
+
+.suggestions div:hover{
+background:#3b82f6;
+color:black;
+}
+
+/* RESULTS */
 .results{
 margin-top:40px;
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
 gap:20px;
 }
 
 .card{
-background:#1e293b;border-radius:10px;overflow:hidden;
+background:#1e293b;
+border-radius:12px;
+overflow:hidden;
+transition:0.3s;
 }
+.card:hover{
+transform:scale(1.03);
+}
+
 .card img{
-width:100%;height:300px;object-fit:cover;
+width:100%;
+height:320px;
+object-fit:cover;
 }
-.card h4{padding:10px;}
+
+.card h4{
+padding:12px;
+font-weight:400;
+}
 </style>
 </head>
 
@@ -65,6 +139,7 @@ width:100%;height:300px;object-fit:cover;
 
 <header>
 <h1>INDIAN BLANKOS</h1>
+
 <nav>
 <button onclick="showSection('home')">Home</button>
 <button onclick="showSection('engine')">Engine</button>
@@ -73,6 +148,7 @@ width:100%;height:300px;object-fit:cover;
 
 <!-- HOME -->
 <div id="home" class="section active">
+
 <div class="hero">
 <h2>INDIAN BLANKOS</h2>
 <p>Directors spark of thought to crafting reality</p>
@@ -80,12 +156,14 @@ width:100%;height:300px;object-fit:cover;
 
 <h2 style="text-align:center;color:#3b82f6;">Our Mission</h2>
 <p style="text-align:center;max-width:700px;margin:auto;">
-INDIAN BLANKOS maps Indian cinema at scale — connecting directors and films into one powerful discovery engine.
+INDIAN BLANKOS connects Indian cinema by mapping directors and their creations into a powerful discovery engine.
 </p>
+
 </div>
 
 <!-- ENGINE -->
 <div id="engine" class="section">
+
 <h2 style="text-align:center;color:#3b82f6;">Search Directors</h2>
 
 <div class="search-box" style="margin:auto;">
@@ -94,6 +172,7 @@ INDIAN BLANKOS maps Indian cinema at scale — connecting directors and films in
 </div>
 
 <div id="results" class="results"></div>
+
 </div>
 
 <script>
@@ -104,43 +183,59 @@ document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
 document.getElementById(id).classList.add("active");
 }
 
-/* NAME GENERATOR (INDIAN STYLE) */
-const firstNames=[
-"Arjun","Ravi","Kiran","Vikram","Ajay","Rohan","Sanjay","Amit","Raj","Manoj",
-"Deepak","Naveen","Karthik","Siddharth","Varun","Aditya","Rakesh","Prakash",
-"Mahesh","Anil","Rahul","Vivek","Suresh","Harish","Girish"
-];
+/* BASE REAL DIRECTORS + MOVIES */
+const baseData = [
 
-const lastNames=[
-"Kumar","Reddy","Sharma","Verma","Menon","Iyer","Naidu","Shetty","Kapoor",
-"Chopra","Mehta","Nair","Rao","Joshi","Das","Bose","Ghosh","Patel","Singh",
-"Yadav","Kulkarni","Desai","Pillai","Bhatt","Mishra"
-];
-
-/* GENERATE 1000 UNIQUE DIRECTORS */
-const directors=[];
-
-for(let i=0;i<1000;i++){
-let name = 
-firstNames[Math.floor(Math.random()*firstNames.length)] + " " +
-lastNames[Math.floor(Math.random()*lastNames.length)] + " " + i;
-
-directors.push({
-name:name,
+{
+name:"S. S. Rajamouli",
 movies:[
-{
-title:"Blockbuster "+i,
-poster:"https://via.placeholder.com/300x450?text=Blockbuster"
-},
-{
-title:"Drama "+i,
-poster:"https://via.placeholder.com/300x450?text=Drama"
-},
-{
-title:"Action "+i,
-poster:"https://via.placeholder.com/300x450?text=Action"
-}
+{title:"RRR",poster:"https://upload.wikimedia.org/wikipedia/en/d/d7/RRR_Poster.jpg"},
+{title:"Baahubali",poster:"https://upload.wikimedia.org/wikipedia/en/5/5f/Baahubali_The_Beginning_poster.jpg"}
 ]
+},
+
+{
+name:"Rajkumar Hirani",
+movies:[
+{title:"3 Idiots",poster:"https://upload.wikimedia.org/wikipedia/en/d/df/3_idiots_poster.jpg"},
+{title:"PK",poster:"https://upload.wikimedia.org/wikipedia/en/c/c3/PK_poster.jpg"}
+]
+},
+
+{
+name:"Mani Ratnam",
+movies:[
+{title:"Roja",poster:"https://upload.wikimedia.org/wikipedia/en/9/9f/Roja_film_poster.jpg"},
+{title:"Guru",poster:"https://upload.wikimedia.org/wikipedia/en/1/15/Guru_%282007_film%29_poster.jpg"}
+]
+},
+
+{
+name:"Lokesh Kanagaraj",
+movies:[
+{title:"Vikram",poster:"https://upload.wikimedia.org/wikipedia/en/9/93/Vikram_2022_poster.jpg"},
+{title:"Kaithi",poster:"https://upload.wikimedia.org/wikipedia/en/3/3f/Kaithi_2019_poster.jpg"}
+]
+},
+
+{
+name:"Karan Johar",
+movies:[
+{title:"Kabhi Khushi Kabhie Gham",poster:"https://upload.wikimedia.org/wikipedia/en/4/4d/Kabhi_Khushi_Kabhie_Gham_poster.jpg"},
+{title:"My Name Is Khan",poster:"https://upload.wikimedia.org/wikipedia/en/5/5d/My_Name_Is_Khan_poster.jpg"}
+]
+}
+
+];
+
+/* EXPAND TO ~1000 DATA */
+const directors=[];
+for(let i=0;i<200;i++){
+baseData.forEach(d=>{
+directors.push({
+name:d.name+" "+i,
+movies:d.movies
+});
 });
 }
 
