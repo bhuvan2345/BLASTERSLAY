@@ -3,121 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INDIA BLANKOS</title>
+<title>INDIAN BLANKOS</title>
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background: #111;
-        color: white;
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
 
-    header {
-        background: #000;
-        padding: 20px;
-        text-align: center;
-        font-size: 28px;
-        font-weight: bold;
-        color: #00ffcc;
-    }
+body {
+    background: #0b0b0b;
+    color: white;
+}
 
-    nav {
-        display: flex;
-        justify-content: center;
-        background: #222;
-    }
+/* HERO SECTION */
+.hero {
+    height: 100vh;
+    background: linear-gradient(to right, #000000, #1a1a1a);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+    padding: 20px;
+}
 
-    nav button {
-        background: none;
-        border: none;
-        color: white;
-        padding: 15px 25px;
-        cursor: pointer;
-        font-size: 16px;
-    }
+.hero h1 {
+    font-size: 60px;
+    color: #00ffc8;
+    letter-spacing: 2px;
+}
 
-    nav button:hover {
-        background: #00ffcc;
-        color: black;
-    }
+.hero p {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #ccc;
+}
 
-    .section {
-        display: none;
-        padding: 40px;
-    }
+/* SEARCH BOX */
+.search-container {
+    margin-top: 30px;
+    width: 60%;
+    max-width: 600px;
+}
 
-    .active {
-        display: block;
-    }
+input {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
 
-    input {
-        width: 60%;
-        padding: 12px;
-        font-size: 16px;
-        border-radius: 5px;
-        border: none;
-        outline: none;
-    }
+/* SUGGESTIONS */
+.suggestions {
+    background: #1a1a1a;
+    border-radius: 5px;
+    margin-top: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+}
 
-    .suggestions {
-        background: #222;
-        width: 60%;
-        margin: auto;
-        border-radius: 5px;
-        max-height: 200px;
-        overflow-y: auto;
-    }
+.suggestions div {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    cursor: pointer;
+}
 
-    .suggestions div {
-        padding: 10px;
-        cursor: pointer;
-        border-bottom: 1px solid #333;
-    }
+.suggestions div:hover {
+    background: #00ffc8;
+    color: black;
+}
 
-    .suggestions div:hover {
-        background: #00ffcc;
-        color: black;
-    }
+/* RESULTS */
+.results {
+    margin-top: 20px;
+    text-align: left;
+}
 
-    .results {
-        margin-top: 20px;
-    }
+/* SECTION */
+.section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.section h2 {
+    margin-bottom: 20px;
+    color: #00ffc8;
+}
+
 </style>
 </head>
 
 <body>
 
-<header>INDIA BLANKOS</header>
+<!-- HERO -->
+<div class="hero">
+    <h1>INDIAN BLANKOS</h1>
+    <p>Directors spark of thought to crafting reality</p>
 
-<nav>
-    <button onclick="showSection('home')">Home</button>
-    <button onclick="showSection('engine')">Search Engine</button>
-</nav>
-
-<!-- HOME -->
-<div id="home" class="section active">
-    <h2>Our Mission</h2>
-    <p>
-        INDIA BLANKOS is designed to organize and simplify access to Indian cinema knowledge.
-        Our goal is to map directors to their work, making it easier to explore filmographies,
-        discover patterns, and understand the depth of Indian filmmaking.
-    </p>
-</div>
-
-<!-- SEARCH ENGINE -->
-<div id="engine" class="section">
-    <h2>Search Director</h2>
-
-    <input type="text" id="searchBox" placeholder="Start typing director name...">
-    <div class="suggestions" id="suggestions"></div>
+    <div class="search-container">
+        <input type="text" id="searchBox" placeholder="Search Indian Directors...">
+        <div class="suggestions" id="suggestions"></div>
+    </div>
 
     <div class="results" id="results"></div>
 </div>
 
+<!-- MISSION SECTION -->
+<div class="section">
+    <h2>Our Mission</h2>
+    <p>
+        INDIAN BLANKOS is built to map the creative minds behind Indian cinema.
+        From legendary filmmakers to modern storytellers, we aim to connect directors
+        with their work, enabling discovery, research, and inspiration across industries.
+    </p>
+</div>
+
 <script>
 
-// SAMPLE DATA (expand this to 1000+ directors later)
+/* SAMPLE DATA (STRUCTURED FOR SCALING) */
 const data = [
     {
         name: "S. S. Rajamouli",
@@ -142,6 +150,10 @@ const data = [
     {
         name: "Zoya Akhtar",
         movies: ["Gully Boy", "ZNMD", "Dil Dhadakne Do"]
+    },
+    {
+        name: "Karan Johar",
+        movies: ["Kabhi Khushi Kabhie Gham", "My Name is Khan"]
     }
 ];
 
@@ -149,30 +161,27 @@ const searchBox = document.getElementById("searchBox");
 const suggestions = document.getElementById("suggestions");
 const results = document.getElementById("results");
 
-// SHOW SECTIONS
-function showSection(section) {
-    document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
-    document.getElementById(section).classList.add("active");
-}
-
-// SEARCH LOGIC
+/* SEARCH INPUT */
 searchBox.addEventListener("input", function() {
     let input = this.value.toLowerCase();
     suggestions.innerHTML = "";
 
     if (!input) return;
 
-    let filtered = data.filter(d => d.name.toLowerCase().includes(input));
+    let filtered = data.filter(d =>
+        d.name.toLowerCase().includes(input) ||
+        d.movies.some(m => m.toLowerCase().includes(input))
+    );
 
     filtered.forEach(d => {
         let div = document.createElement("div");
-        div.textContent = d.name;
+        div.innerHTML = `<strong>${d.name}</strong><br><small>${d.movies.slice(0,2).join(", ")}...</small>`;
         div.onclick = () => selectDirector(d);
         suggestions.appendChild(div);
     });
 });
 
-// SELECT DIRECTOR
+/* SELECT DIRECTOR */
 function selectDirector(director) {
     searchBox.value = director.name;
     suggestions.innerHTML = "";
