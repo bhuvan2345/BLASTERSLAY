@@ -1,0 +1,69 @@
+const express = require("express");
+const app = express();
+
+app.use(express.static("public"));
+
+/* DATA */
+const directors = [
+{
+name:"S. S. Rajamouli",
+movies:[
+{title:"RRR",poster:"https://upload.wikimedia.org/wikipedia/en/d/d7/RRR_Poster.jpg"},
+{title:"Baahubali",poster:"https://upload.wikimedia.org/wikipedia/en/5/5f/Baahubali_The_Beginning_poster.jpg"}
+]
+},
+{
+name:"Rajkumar Hirani",
+movies:[
+{title:"3 Idiots",poster:"https://upload.wikimedia.org/wikipedia/en/d/df/3_idiots_poster.jpg"},
+{title:"PK",poster:"https://upload.wikimedia.org/wikipedia/en/c/c3/PK_poster.jpg"}
+]
+},
+{
+name:"Mani Ratnam",
+movies:[
+{title:"Roja",poster:"https://upload.wikimedia.org/wikipedia/en/9/9f/Roja_film_poster.jpg"},
+{title:"Guru",poster:"https://upload.wikimedia.org/wikipedia/en/1/15/Guru_%282007_film%29_poster.jpg"}
+]
+},
+{
+name:"Anurag Kashyap",
+movies:[
+{title:"Gangs of Wasseypur",poster:"https://upload.wikimedia.org/wikipedia/en/6/6c/Gangs_of_Wasseypur.jpg"},
+{title:"Ugly",poster:"https://upload.wikimedia.org/wikipedia/en/3/3d/Ugly_film_poster.jpg"}
+]
+},
+{
+name:"Lokesh Kanagaraj",
+movies:[
+{title:"Vikram",poster:"https://upload.wikimedia.org/wikipedia/en/9/93/Vikram_2022_poster.jpg"},
+{title:"Kaithi",poster:"https://upload.wikimedia.org/wikipedia/en/3/3f/Kaithi_2019_poster.jpg"}
+]
+}
+];
+
+/* EXPAND TO 100 */
+const big = [];
+for(let i=0;i<20;i++){
+directors.forEach(d=>{
+big.push({
+name: d.name + " " + i,
+movies: d.movies
+});
+});
+}
+
+/* API */
+app.get("/search",(req,res)=>{
+const q = (req.query.q || "").toLowerCase();
+
+const results = big.filter(d =>
+d.name.toLowerCase().includes(q) ||
+d.movies.some(m=>m.title.toLowerCase().includes(q))
+);
+
+res.json(results);
+});
+
+/* RUN */
+app.listen(3000,()=>console.log("http://localhost:3000"));
