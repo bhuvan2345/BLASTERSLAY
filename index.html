@@ -14,45 +14,66 @@
 }
 
 body {
-    background: #0b0b0b;
-    color: white;
+    background: #0a0f1c;
+    color: #e6e6e6;
 }
 
-/* HERO SECTION */
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    background: #0d1326;
+    border-bottom: 1px solid #1f2a44;
+}
+
+header h2 {
+    color: #4da6ff;
+}
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #ccc;
+}
+
+nav a:hover {
+    color: #4da6ff;
+}
+
+/* HERO */
 .hero {
-    height: 100vh;
-    background: linear-gradient(to right, #000000, #1a1a1a);
+    height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center; 
-    padding: 20px;
+    background: radial-gradient(circle at center, #111a33, #05070f);
+    text-align: center;
 }
 
 .hero h1 {
-    font-size: 60px;
-    color: #00ffc8;
-    letter-spacing: 2px;
+    font-size: 70px;
+    color: #4da6ff;
+    letter-spacing: 3px;
 }
 
 .hero p {
-    font-size: 18px;
     margin-top: 10px;
-    color: #ccc;
+    font-size: 18px;
+    color: #aaa;
 }
 
-/* SEARCH BOX */
-.search-container {
+/* SEARCH */
+.search-box {
     margin-top: 30px;
-    width: 60%;
+    width: 50%;
     max-width: 600px;
 }
 
-input {
+.search-box input {
     width: 100%;
     padding: 14px;
-    font-size: 16px;
     border-radius: 5px;
     border: none;
     outline: none;
@@ -60,7 +81,7 @@ input {
 
 /* SUGGESTIONS */
 .suggestions {
-    background: #1a1a1a;
+    background: #111a33;
     border-radius: 5px;
     margin-top: 5px;
     max-height: 200px;
@@ -69,30 +90,48 @@ input {
 
 .suggestions div {
     padding: 10px;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #1f2a44;
     cursor: pointer;
 }
 
 .suggestions div:hover {
-    background: #00ffc8;
+    background: #4da6ff;
     color: black;
 }
 
 /* RESULTS */
 .results {
     margin-top: 20px;
-    text-align: left;
 }
 
 /* SECTION */
 .section {
-    padding: 60px 20px;
+    padding: 60px 40px;
     text-align: center;
 }
 
-.section h2 {
-    margin-bottom: 20px;
-    color: #00ffc8;
+/* MAP */
+.map-container {
+    margin-top: 40px;
+}
+
+svg {
+    width: 90%;
+    max-width: 900px;
+    cursor: grab;
+}
+
+.country {
+    fill: #1f2a44;
+    stroke: #555;
+}
+
+.country:hover {
+    fill: #4da6ff;
+}
+
+.active-country {
+    fill: #00ccff !important;
 }
 
 </style>
@@ -100,100 +139,139 @@ input {
 
 <body>
 
+<header>
+    <h2>INDIAN BLANKOS</h2>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#engine">Engine</a>
+        <a href="#map">World Map</a>
+    </nav>
+</header>
+
 <!-- HERO -->
-<div class="hero">
+<section class="hero" id="home">
     <h1>INDIAN BLANKOS</h1>
     <p>Directors spark of thought to crafting reality</p>
 
-    <div class="search-container">
-        <input type="text" id="searchBox" placeholder="Search Indian Directors...">
+    <div class="search-box">
+        <input type="text" id="searchBox" placeholder="Search Directors or Movies...">
         <div class="suggestions" id="suggestions"></div>
     </div>
 
     <div class="results" id="results"></div>
-</div>
+</section>
 
-<!-- MISSION SECTION -->
-<div class="section">
+<!-- MISSION -->
+<section class="section">
     <h2>Our Mission</h2>
     <p>
-        INDIAN BLANKOS is built to map the creative minds behind Indian cinema.
-        From legendary filmmakers to modern storytellers, we aim to connect directors
-        with their work, enabling discovery, research, and inspiration across industries.
+        INDIAN BLANKOS connects filmmakers, directors, and cinema intelligence.
+        We map creativity across industries — from India to global cinema —
+        enabling discovery of filmographies, Oscar-winning work, and cinematic impact.
     </p>
-</div>
+</section>
+
+<!-- MAP -->
+<section class="section" id="map">
+    <h2>Explore Cinema by Country</h2>
+
+    <div class="map-container">
+        <!-- SIMPLE SVG MAP (sample countries) -->
+        <svg viewBox="0 0 800 400">
+            <rect class="country" id="india" x="300" y="200" width="80" height="60"/>
+            <rect class="country" id="usa" x="100" y="150" width="80" height="60"/>
+            <rect class="country" id="uk" x="200" y="100" width="60" height="50"/>
+        </svg>
+    </div>
+
+    <div class="results" id="countryResults"></div>
+</section>
 
 <script>
 
-/* SAMPLE DATA (STRUCTURED FOR SCALING) */
-const data = [
+/* DIRECTOR DATA (expandable to 1000+) */
+const directors = [
     {
         name: "S. S. Rajamouli",
-        movies: ["Baahubali", "RRR", "Eega", "Magadheera"]
+        movies: ["RRR", "Baahubali"]
     },
     {
         name: "Mani Ratnam",
-        movies: ["Roja", "Bombay", "Guru", "Ponniyin Selvan"]
-    },
-    {
-        name: "Anurag Kashyap",
-        movies: ["Gangs of Wasseypur", "Ugly", "Black Friday"]
+        movies: ["Roja", "Bombay"]
     },
     {
         name: "Rajkumar Hirani",
-        movies: ["3 Idiots", "PK", "Sanju", "Munna Bhai MBBS"]
-    },
-    {
-        name: "Lokesh Kanagaraj",
-        movies: ["Kaithi", "Vikram", "Leo"]
-    },
-    {
-        name: "Zoya Akhtar",
-        movies: ["Gully Boy", "ZNMD", "Dil Dhadakne Do"]
-    },
-    {
-        name: "Karan Johar",
-        movies: ["Kabhi Khushi Kabhie Gham", "My Name is Khan"]
+        movies: ["3 Idiots", "PK"]
     }
 ];
+
+/* OSCAR DATA */
+const countryData = {
+    india: [
+        { name: "RRR", type: "Oscar Winner" },
+        { name: "Lagaan", type: "Nominee" }
+    ],
+    usa: [
+        { name: "Oppenheimer", type: "Winner" },
+        { name: "Titanic", type: "Winner" }
+    ],
+    uk: [
+        { name: "The King's Speech", type: "Winner" }
+    ]
+};
 
 const searchBox = document.getElementById("searchBox");
 const suggestions = document.getElementById("suggestions");
 const results = document.getElementById("results");
 
-/* SEARCH INPUT */
-searchBox.addEventListener("input", function() {
-    let input = this.value.toLowerCase();
+/* SEARCH */
+searchBox.addEventListener("input", () => {
+    let input = searchBox.value.toLowerCase();
     suggestions.innerHTML = "";
 
     if (!input) return;
 
-    let filtered = data.filter(d =>
+    let filtered = directors.filter(d =>
         d.name.toLowerCase().includes(input) ||
         d.movies.some(m => m.toLowerCase().includes(input))
     );
 
     filtered.forEach(d => {
         let div = document.createElement("div");
-        div.innerHTML = `<strong>${d.name}</strong><br><small>${d.movies.slice(0,2).join(", ")}...</small>`;
+        div.innerHTML = `<b>${d.name}</b><br><small>${d.movies.join(", ")}</small>`;
         div.onclick = () => selectDirector(d);
         suggestions.appendChild(div);
     });
 });
 
-/* SELECT DIRECTOR */
-function selectDirector(director) {
-    searchBox.value = director.name;
+function selectDirector(d) {
+    searchBox.value = d.name;
     suggestions.innerHTML = "";
 
-    let html = `<h3>Movies by ${director.name}</h3><ul>`;
-    director.movies.forEach(m => {
-        html += `<li>${m}</li>`;
-    });
+    let html = `<h3>${d.name}</h3><ul>`;
+    d.movies.forEach(m => html += `<li>${m}</li>`);
     html += "</ul>";
 
     results.innerHTML = html;
 }
+
+/* MAP CLICK */
+document.querySelectorAll(".country").forEach(c => {
+    c.addEventListener("click", () => {
+        document.querySelectorAll(".country").forEach(x => x.classList.remove("active-country"));
+        c.classList.add("active-country");
+
+        let data = countryData[c.id] || [];
+        let html = `<h3>${c.id.toUpperCase()}</h3><ul>`;
+
+        data.forEach(movie => {
+            html += `<li>${movie.name} - ${movie.type}</li>`;
+        });
+
+        html += "</ul>";
+        document.getElementById("countryResults").innerHTML = html;
+    });
+});
 
 </script>
 
