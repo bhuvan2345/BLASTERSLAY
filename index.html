@@ -18,32 +18,56 @@ color:white;
 header{
 display:flex;
 justify-content:space-between;
-padding:20px 40px;
+padding:20px 50px;
 background:#0f172a;
 position:sticky;
 top:0;
+z-index:10;
 }
-header h1{color:#3b82f6;}
+header h1{color:#3b82f6;font-weight:600;}
 
 nav button{
 background:none;border:none;color:white;margin-left:20px;cursor:pointer;
 }
 nav button:hover{color:#3b82f6;}
 
-/* SECTION */
-.section{display:none;padding:50px;}
+/* SECTIONS */
+.section{display:none;padding:60px;}
 .active{display:block;}
 
 /* HERO */
-.hero{text-align:center;margin-top:100px;}
-.hero h1{font-size:60px;color:#3b82f6;}
-.hero p{color:#94a3b8;}
+.hero{
+text-align:center;
+padding-top:120px;
+}
+.hero h1{
+font-size:72px;
+color:#3b82f6;
+margin-bottom:10px;
+}
+.hero p{
+font-size:18px;
+color:#94a3b8;
+}
+
+/* ICONS */
+.icons{
+display:flex;
+justify-content:center;
+gap:60px;
+margin-top:50px;
+}
+.icon{
+width:50px;
+height:50px;
+fill:#3b82f6;
+}
 
 /* SEARCH */
 .search-box{
-margin:30px auto;
+margin:40px auto;
 width:60%;
-max-width:600px;
+max-width:700px;
 }
 
 .search-row{
@@ -58,10 +82,10 @@ border-radius:5px;
 border:none;
 }
 
-button.search-btn,button.clear-btn{
-padding:14px;
+button{
 border:none;
 border-radius:5px;
+padding:14px;
 cursor:pointer;
 }
 
@@ -75,57 +99,48 @@ margin-top:5px;
 max-height:200px;
 overflow:auto;
 }
-.suggestions div{padding:10px;cursor:pointer;}
-.suggestions div:hover{background:#3b82f6;color:black;}
+
+.suggestions div{
+padding:10px;
+cursor:pointer;
+}
+
+.suggestions div:hover{
+background:#3b82f6;
+color:black;
+}
 
 /* RESULTS */
-.results{
-margin-top:30px;
-}
+.results{margin-top:30px;}
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+gap:12px;
 }
 
 .card{
 background:#1e293b;
-border-radius:10px;
+border-radius:5px;
 overflow:hidden;
 }
 
 .card img{
 width:100%;
-height:320px;
+height:220px;
 object-fit:cover;
 }
 
-.card h4{padding:10px;}
+.card h4{
+padding:8px;
+font-size:13px;
+}
 
 .director-title{
-margin-top:20px;
-font-size:20px;
+margin:20px 0 10px;
 color:#3b82f6;
+font-size:18px;
 }
-
-/* ICONS */
-.icons{
-display:flex;
-justify-content:center;
-gap:40px;
-margin-top:40px;
-}
-
-.icon-box{
-text-align:center;
-}
-
-.icon-box i{
-font-size:30px;
-color:#3b82f6;
-}
-
 </style>
 </head>
 
@@ -136,22 +151,23 @@ color:#3b82f6;
 <nav>
 <button onclick="showSection('home')">Home</button>
 <button onclick="showSection('engine')">Engine</button>
-<button onclick="showSection('about')">About</button>
 </nav>
 </header>
 
 <!-- HOME -->
 <div id="home" class="section active">
+
 <div class="hero">
 <h1>INDIAN BLANKOS</h1>
 <p>Directors spark of thought to crafting reality</p>
 </div>
 
 <div class="icons">
-<div class="icon-box">🎬<p>Directors</p></div>
-<div class="icon-box">📊<p>Film Data</p></div>
-<div class="icon-box">🌍<p>Indian Cinema</p></div>
+<svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg>
+<svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 22h20z"/></svg>
+<svg class="icon" viewBox="0 0 24 24"><path d="M12 12l8-8H4z"/></svg>
 </div>
+
 </div>
 
 <!-- ENGINE -->
@@ -163,8 +179,8 @@ color:#3b82f6;
 
 <div class="search-row">
 <input id="search" placeholder="Search directors or movies...">
-<button class="search-btn" onclick="performSearch()">Search</button>
-<button class="clear-btn" onclick="clearSearch()">Clear</button>
+<button class="search-btn" onclick="searchNow()">Search</button>
+<button class="clear-btn" onclick="clearAll()">Clear</button>
 </div>
 
 <div id="suggestions" class="suggestions"></div>
@@ -175,14 +191,6 @@ color:#3b82f6;
 
 </div>
 
-<!-- ABOUT -->
-<div id="about" class="section">
-<h2 style="color:#3b82f6;text-align:center;">About</h2>
-<p style="max-width:700px;margin:auto;text-align:center;">
-INDIAN BLANKOS is a cinematic intelligence platform mapping Indian directors and films into one discovery engine.
-</p>
-</div>
-
 <script>
 
 /* NAV */
@@ -191,47 +199,46 @@ document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
 document.getElementById(id).classList.add("active");
 }
 
-/* DATA */
-const base=[
-{
-name:"S. S. Rajamouli",
-movies:[
-{title:"RRR",poster:"https://upload.wikimedia.org/wikipedia/en/d/d7/RRR_Poster.jpg"},
-{title:"Baahubali",poster:"https://upload.wikimedia.org/wikipedia/en/5/5f/Baahubali_The_Beginning_poster.jpg"}
-]
-},
-{
-name:"Rajkumar Hirani",
-movies:[
-{title:"3 Idiots",poster:"https://upload.wikimedia.org/wikipedia/en/d/df/3_idiots_poster.jpg"},
-{title:"PK",poster:"https://upload.wikimedia.org/wikipedia/en/c/c3/PK_poster.jpg"}
-]
-}
+/* 100 DIRECTORS DATA */
+const directors = [];
+
+const base = [
+"S. S. Rajamouli","Rajkumar Hirani","Mani Ratnam","Anurag Kashyap",
+"Lokesh Kanagaraj","Karan Johar","Zoya Akhtar","Rohit Shetty",
+"Sanjay Leela Bhansali","Priyadarshan"
 ];
 
-const directors=[];
-for(let i=0;i<500;i++){
-base.forEach(d=>{
+const posters = [
+"https://upload.wikimedia.org/wikipedia/en/d/d7/RRR_Poster.jpg",
+"https://upload.wikimedia.org/wikipedia/en/d/df/3_idiots_poster.jpg",
+"https://upload.wikimedia.org/wikipedia/en/9/9f/Roja_film_poster.jpg",
+"https://upload.wikimedia.org/wikipedia/en/9/93/Vikram_2022_poster.jpg",
+"https://upload.wikimedia.org/wikipedia/en/4/4d/Kabhi_Khushi_Kabhie_Gham_poster.jpg"
+];
+
+for(let i=0;i<100;i++){
 directors.push({
-name:d.name+" "+i,
-movies:d.movies
-});
+name: base[i % base.length] + " " + i,
+movies:[
+{title:"Film "+i, poster:posters[i % posters.length]},
+{title:"Cinema "+i, poster:posters[(i+1)%posters.length]},
+{title:"Story "+i, poster:posters[(i+2)%posters.length]}
+]
 });
 }
 
-/* SEARCH LOGIC */
-const input=document.getElementById("search");
-const sug=document.getElementById("suggestions");
-const res=document.getElementById("results");
+/* SEARCH */
+const input = document.getElementById("search");
+const sug = document.getElementById("suggestions");
+const res = document.getElementById("results");
 
-input.addEventListener("input",showSuggestions);
-
-function showSuggestions(){
-let val=input.value.toLowerCase();
+input.addEventListener("input", ()=>{
+let val = input.value.toLowerCase();
 sug.innerHTML="";
+
 if(!val) return;
 
-let matches=directors.filter(d=>
+let matches = directors.filter(d =>
 d.name.toLowerCase().includes(val) ||
 d.movies.some(m=>m.title.toLowerCase().includes(val))
 ).slice(0,10);
@@ -241,17 +248,17 @@ let div=document.createElement("div");
 div.innerHTML=`<b>${d.name}</b> — ${d.movies[0].title}`;
 div.onclick=()=>{
 input.value=d.name;
-performSearch();
+searchNow();
 };
 sug.appendChild(div);
 });
-}
+});
 
-function performSearch(){
+function searchNow(){
 let val=input.value.toLowerCase();
 res.innerHTML="";
 
-let results=directors.filter(d=>
+let results = directors.filter(d =>
 d.name.toLowerCase().includes(val) ||
 d.movies.some(m=>m.title.toLowerCase().includes(val))
 ).slice(0,5);
@@ -271,7 +278,7 @@ res.innerHTML+=`</div>`;
 });
 }
 
-function clearSearch(){
+function clearAll(){
 input.value="";
 sug.innerHTML="";
 res.innerHTML="";
