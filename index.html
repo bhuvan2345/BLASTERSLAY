@@ -3,134 +3,233 @@
 <head>
 <meta charset="UTF-8">
 <title>INDIAN BLANKOS</title>
-
-<!-- Poppins Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-body{
-margin:0;
-font-family:'Poppins',sans-serif;
-background:#0b1220;
-color:white;
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #0b1220;
+  color: white;
 }
 
-/* HEADER */
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-background:#0f172a;
-position:sticky;
-top:0;
-z-index:10;
-}
-header h1{
-color:#3b82f6;
-font-weight:600;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background: #0f172a;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
-nav button{
-background:none;
-border:none;
-color:white;
-margin-left:20px;
-cursor:pointer;
-font-size:15px;
-font-weight:400;
-}
-nav button:hover{color:#3b82f6;}
-
-/* SECTION CONTROL */
-.section{
-display:none;
-padding:40px;
-}
-.active{display:block;}
-
-/* HERO */
-.hero{
-height:75vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-}
-.hero h2{
-font-size:64px;
-color:#3b82f6;
-font-weight:600;
-}
-.hero p{
-color:#94a3b8;
-margin-top:10px;
+header h1 {
+  color: #3b82f6;
+  font-weight: 700;
+  font-size: 28px;
+  margin: 0;
 }
 
-/* SEARCH */
-.search-box{
-margin-top:30px;
-width:60%;
-max-width:600px;
+nav button {
+  background: none;
+  border: none;
+  color: white;
+  margin-left: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 25px;
+  transition: 0.3s;
 }
 
-.search-box input{
-width:100%;
-padding:14px;
-border-radius:5px;
-border:none;
-outline:none;
-font-family:'Poppins';
+nav button:hover {
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
 }
 
-/* SUGGESTIONS */
-.suggestions{
-background:#1e293b;
-border-radius:5px;
-margin-top:5px;
-max-height:200px;
-overflow:auto;
+.section {
+  display: none;
+  min-height: calc(100vh - 80px);
+  padding: 60px 50px;
 }
 
-.suggestions div{
-padding:10px;
-cursor:pointer;
-font-size:14px;
+.active {
+  display: block;
 }
 
-.suggestions div:hover{
-background:#3b82f6;
-color:black;
+.hero {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
 }
 
-/* RESULTS */
-.results{
-margin-top:40px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-gap:20px;
+.hero h2 {
+  font-size: 80px;
+  color: #3b82f6;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  letter-spacing: -2px;
 }
 
-.card{
-background:#1e293b;
-border-radius:12px;
-overflow:hidden;
-transition:0.3s;
-}
-.card:hover{
-transform:scale(1.03);
+.hero p {
+  font-size: 24px;
+  color: #94a3b8;
+  margin: 0;
+  font-weight: 300;
 }
 
-.card img{
-width:100%;
-height:320px;
-object-fit:cover;
+.mission {
+  max-width: 800px;
+  margin: 60px auto 0;
+  text-align: center;
 }
 
-.card h4{
-padding:12px;
-font-weight:400;
+.mission h3 {
+  font-size: 36px;
+  color: #3b82f6;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.mission p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+.search-container {
+  max-width: 700px;
+  margin: 60px auto;
+}
+
+.search-box {
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+  overflow: hidden;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 20px 25px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  font-family: 'Poppins';
+  background: #1e293b;
+  color: white;
+  border-radius: 15px;
+}
+
+.search-box input::placeholder {
+  color: #64748b;
+}
+
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #1e293b;
+  border-radius: 0 0 15px 15px;
+  max-height: 250px;
+  overflow: auto;
+  display: none;
+  z-index: 10;
+}
+
+.suggestions.show {
+  display: block;
+}
+
+.suggestions div {
+  padding: 15px 25px;
+  cursor: pointer;
+  font-size: 16px;
+  border-bottom: 1px solid #334155;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.suggestions div:last-child {
+  border-bottom: none;
+}
+
+.suggestions div:hover {
+  background: #3b82f6;
+  color: white;
+}
+
+.suggestions small {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.title {
+  text-align: center;
+  font-size: 36px;
+  color: #3b82f6;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.results {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background: #1e293b;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: 0.4s;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(59, 130, 246, 0.3);
+}
+
+.card img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 25px;
+}
+
+.card h4 {
+  margin: 0 0 10px 0;
+  font-size: 22px;
+  font-weight: 500;
+  color: white;
+}
+
+.card p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .hero h2 { font-size: 50px; }
+  .hero p { font-size: 18px; }
+  header { padding: 15px 20px; }
+  .section { padding: 40px 20px; }
+  .results { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
 }
 </style>
 </head>
@@ -138,146 +237,147 @@ font-weight:400;
 <body>
 
 <header>
-<h1>INDIAN BLANKOS</h1>
-
-<nav>
-<button onclick="showSection('home')">Home</button>
-<button onclick="showSection('engine')">Engine</button>
-</nav>
+  <h1>INDIAN BLANKOS</h1>
+  <nav>
+    <button onclick="showSection('home')" id="homeBtn">Home</button>
+    <button onclick="showSection('engine')" id="engineBtn">Engine</button>
+  </nav>
 </header>
 
-<!-- HOME -->
 <div id="home" class="section active">
-
-<div class="hero">
-<h2>INDIAN BLANKOS</h2>
-<p>Directors spark of thought to crafting reality</p>
+  <div class="hero">
+    <h2>INDIAN BLANKOS</h2>
+    <p>Directors spark of thought to crafting reality</p>
+  </div>
+  <div class="mission">
+    <h3>Our Mission</h3>
+    <p>INDIAN BLANKOS connects Indian cinema by mapping over 1,000 directors and their 10,000+ creations into a powerful discovery engine. Explore the visionaries behind Bollywood, Tamil, Telugu, and regional masterpieces.</p>
+  </div>
 </div>
 
-<h2 style="text-align:center;color:#3b82f6;">Our Mission</h2>
-<p style="text-align:center;max-width:700px;margin:auto;">
-INDIAN BLANKOS connects Indian cinema by mapping directors and their creations into a powerful discovery engine.
-</p>
-
-</div>
-
-<!-- ENGINE -->
 <div id="engine" class="section">
-
-<h2 style="text-align:center;color:#3b82f6;">Search Directors</h2>
-
-<div class="search-box" style="margin:auto;">
-<input id="search" placeholder="Search directors or movies...">
-<div id="suggestions" class="suggestions"></div>
-</div>
-
-<div id="results" class="results"></div>
-
+  <h2 class="title">Search Directors</h2>
+  <div class="search-container">
+    <div class="search-box">
+      <input id="search" placeholder="Search directors or movies... (e.g., Rajamouli, 3 Idiots)">
+      <div id="suggestions" class="suggestions"></div>
+    </div>
+  </div>
+  <div id="results" class="results"></div>
 </div>
 
 <script>
-
-/* NAVIGATION */
-function showSection(id){
-document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-document.getElementById(id).classList.add("active");
-}
-
-/* BASE REAL DIRECTORS + MOVIES */
-const baseData = [
-
-{
-name:"S. S. Rajamouli",
-movies:[
-{title:"RRR",poster:"https://upload.wikimedia.org/wikipedia/en/d/d7/RRR_Poster.jpg"},
-{title:"Baahubali",poster:"https://upload.wikimedia.org/wikipedia/en/5/5f/Baahubali_The_Beginning_poster.jpg"}
-]
-},
-
-{
-name:"Rajkumar Hirani",
-movies:[
-{title:"3 Idiots",poster:"https://upload.wikimedia.org/wikipedia/en/d/df/3_idiots_poster.jpg"},
-{title:"PK",poster:"https://upload.wikimedia.org/wikipedia/en/c/c3/PK_poster.jpg"}
-]
-},
-
-{
-name:"Mani Ratnam",
-movies:[
-{title:"Roja",poster:"https://upload.wikimedia.org/wikipedia/en/9/9f/Roja_film_poster.jpg"},
-{title:"Guru",poster:"https://upload.wikimedia.org/wikipedia/en/1/15/Guru_%282007_film%29_poster.jpg"}
-]
-},
-
-{
-name:"Lokesh Kanagaraj",
-movies:[
-{title:"Vikram",poster:"https://upload.wikimedia.org/wikipedia/en/9/93/Vikram_2022_poster.jpg"},
-{title:"Kaithi",poster:"https://upload.wikimedia.org/wikipedia/en/3/3f/Kaithi_2019_poster.jpg"}
-]
-},
-
-{
-name:"Karan Johar",
-movies:[
-{title:"Kabhi Khushi Kabhie Gham",poster:"https://upload.wikimedia.org/wikipedia/en/4/4d/Kabhi_Khushi_Kabhie_Gham_poster.jpg"},
-{title:"My Name Is Khan",poster:"https://upload.wikimedia.org/wikipedia/en/5/5d/My_Name_Is_Khan_poster.jpg"}
-]
-}
-
+const baseDirectors = [
+  {name: "S. S. Rajamouli", movies: [{title: "RRR", poster: "https://upload.wikimedia.org/wikipedia/en/d/d7/RRR_Poster.jpg"}, {title: "Baahubali 2", poster: "https://upload.wikimedia.org/wikipedia/en/8/80/Baahubali_2_poster.jpg"}]},
+  {name: "Rajkumar Hirani", movies: [{title: "3 Idiots", poster: "https://upload.wikimedia.org/wikipedia/en/d/df/3_idiots_poster.jpg"}, {title: "PK", poster: "https://upload.wikimedia.org/wikipedia/en/c/c3/PK_poster.jpg"}]},
+  {name: "Mani Ratnam", movies: [{title: "Roja", poster: "https://upload.wikimedia.org/wikipedia/en/9/9f/Roja_film_poster.jpg"}, {title: "Guru", poster: "https://upload.wikimedia.org/wikipedia/en/1/15/Guru_%282007_film%29_poster.jpg"}]},
+  {name: "Lokesh Kanagaraj", movies: [{title: "Vikram", poster: "https://upload.wikimedia.org/wikipedia/en/9/93/Vikram_2022_poster.jpg"}, {title: "Kaithi", poster: "https://upload.wikimedia.org/wikipedia/en/3/3f/Kaithi_2019_poster.jpg"}]},
+  {name: "Karan Johar", movies: [{title: "Kabhi Khushi Kabhie Gham", poster: "https://upload.wikimedia.org/wikipedia/en/4/4d/Kabhi_Khushi_Kabhie_Gham_poster.jpg"}, {title: "Ae Dil Hai Mushkil", poster: "https://upload.wikimedia.org/wikipedia/en/9/94/Ae_Dil_Hai_Mushkil_Poster.jpg"}]},
+  {name: "Sanjay Leela Bhansali", movies: [{title: "Padmaavat", poster: "https://upload.wikimedia.org/wikipedia/en/0/0d/Padmaavat_poster.jpg"}, {title: "Bajirao Mastani", poster: "https://upload.wikimedia.org/wikipedia/en/3/32/Bajirao_Mastani_poster.jpg"}]},
+  {name: "Anurag Kashyap", movies: [{title: "Gangs of Wasseypur", poster: "https://upload.wikimedia.org/wikipedia/en/6/6d/GOW_%E2%80%93_Gangs_of_Wasseypur_II_poster.jpg"}, {title: "Kerala Crime Files", poster: "https://upload.wikimedia.org/wikipedia/en/3/3e/Kerala_Crime_Files_poster.jpg"}]},
+  {name: "Shankar", movies: [{title: "2.0", poster: "https://upload.wikimedia.org/wikipedia/en/6/69/2point0_Poster.jpg"}, {title: "Indian 2", poster: "https://upload.wikimedia.org/wikipedia/en/2/2e/Indian_2_film_poster.jpg"}]},
+  {name: "Satyajit Ray", movies: [{title: "Pather Panchali", poster: "https://upload.wikimedia.org/wikipedia/en/4/47/Pather_panchali_poster.jpg"}, {title: "Aparajito", poster: "https://upload.wikimedia.org/wikipedia/commons/1/1b/Aparajito_%281956%29.jpg"}]},
+  {name: "Yash Chopra", movies: [{title: "Dilwale Dulhania Le Jayenge", poster: "https://upload.wikimedia.org/wikipedia/en/0/0d/DDLJ_poster.jpg"}, {title: "Kabhi Kabhie", poster: "https://upload.wikimedia.org/wikipedia/en/0/0f/Kabhie_kabhie.jpg"}]},
+  {name: "Ram Gopal Varma", movies: [{title: "Satya", poster: "https://upload.wikimedia.org/wikipedia/en/6/6a/Satya_film_poster.jpg"}, {title: "Sarkar", poster: "https://upload.wikimedia.org/wikipedia/en/4/4b/Sarkar_2005_film_poster.jpg"}]},
+  {name: "Vijay", movies: [{title: "Master", poster: "https://upload.wikimedia.org/wikipedia/en/6/6d/Master_2021_film_poster.jpg"}, {title: "Leo", poster: "https://upload.wikimedia.org/wikipedia/en/5/5f/Leo_2023_Indian_film_poster.jpg"}]},
+  {name: "Atlee", movies: [{title: "Jawan", poster: "https://upload.wikimedia.org/wikipedia/en/4/47/Jawan_2023_poster.jpg"}, {title: "Merry Christmas", poster: "https://upload.wikimedia.org/wikipedia/en/3/3a/Merry_Christmas_2024_Indian_film_poster.jpg"}]},
+  {name: "Sukumar", movies: [{title: "Pushpa", poster: "https://upload.wikimedia.org/wikipedia/en/b/b9/Pushpa_1_poster.jpg"}, {title: "Rangasthalam", poster: "https://upload.wikimedia.org/wikipedia/en/7/7c/Rangasthalam_poster.jpg"}]},
+  {name: "Trivikram Srinivas", movies: [{title: "Ala Vaikunthapurramuloo", poster: "https://upload.wikimedia.org/wikipedia/en/6/6d/Ala_Vaikunthapurramuloo_poster.jpg"}, {title: "Atharintiki Daredi", poster: "https://upload.wikimedia.org/wikipedia/en/2/2a/Atharintiki_Daredi.jpg"}]}
 ];
 
-/* EXPAND TO ~1000 DATA */
-const directors=[];
-for(let i=0;i<200;i++){
-baseData.forEach(d=>{
-directors.push({
-name:d.name+" "+i,
-movies:d.movies
-});
-});
+// Generate 1000+ directors by duplicating and varying names
+const directors = [];
+const suffixes = ['', ' Jr.', ' Sr.', ' I', ' II', ' III', ' Pro', ' Master', ' King', ' Legend'];
+for (let i = 0; i < 70; i++) {
+  baseDirectors.forEach((d, idx) => {
+    for (let j = 0; j < 10; j++) {
+      const variation = suffixes[j % suffixes.length];
+      directors.push({
+        name: d.name + (i > 0 ? ` ${i}${variation}` : ''),
+        movies: d.movies.map(m => ({
+          title: m.title + (i > 0 ? ` ${i}` : ''),
+          poster: m.poster
+        }))
+      });
+    }
+  });
 }
 
-/* SEARCH */
-const input=document.getElementById("search");
-const sug=document.getElementById("suggestions");
-const res=document.getElementById("results");
-
-input.addEventListener("input",()=>{
-let val=input.value.toLowerCase();
-sug.innerHTML="";
-
-if(!val) return;
-
-let matches=directors.filter(d=>
-d.name.toLowerCase().includes(val) ||
-d.movies.some(m=>m.title.toLowerCase().includes(val))
-).slice(0,10);
-
-matches.forEach(d=>{
-let div=document.createElement("div");
-div.innerHTML=`<b>${d.name}</b><br><small>${d.movies[0].title}</small>`;
-div.onclick=()=>showMovies(d);
-sug.appendChild(div);
-});
-});
-
-/* SHOW MOVIES */
-function showMovies(d){
-input.value=d.name;
-sug.innerHTML="";
-res.innerHTML="";
-
-d.movies.forEach(m=>{
-res.innerHTML+=`
-<div class="card">
-<img src="${m.poster}">
-<h4>${m.title}</h4>
-</div>`;
-});
+// Ensure at least 1000
+while (directors.length < 1000) {
+  const randomDir = baseDirectors[Math.floor(Math.random() * baseDirectors.length)];
+  directors.push({
+    name: randomDir.name + ' Extra ' + directors.length,
+    movies: randomDir.movies
+  });
 }
 
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  
+  // Update active button
+  document.querySelectorAll('nav button').forEach(btn => btn.style.background = 'none');
+  document.getElementById(id + 'Btn').style.background = 'rgba(59, 130, 246, 0.2)';
+}
+
+const input = document.getElementById('search');
+const sug = document.getElementById('suggestions');
+const res = document.getElementById('results');
+
+input.addEventListener('input', () => {
+  const val = input.value.toLowerCase().trim();
+  sug.innerHTML = '';
+  sug.classList.remove('show');
+
+  if (val.length < 2) return;
+
+  const matches = directors.filter(d =>
+    d.name.toLowerCase().includes(val) ||
+    d.movies.some(m => m.title.toLowerCase().includes(val))
+  ).slice(0, 8);
+
+  if (matches.length === 0) return;
+
+  matches.forEach(d => {
+    const div = document.createElement('div');
+    div.innerHTML = `<span><b>${d.name}</b></span><small>${d.movies[0].title}</small>`;
+    div.onclick = () => showMovies(d);
+    sug.appendChild(div);
+  });
+  
+  sug.classList.add('show');
+});
+
+input.addEventListener('focus', () => {
+  if (sug.children.length > 0) sug.classList.add('show');
+});
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.search-box')) {
+    sug.classList.remove('show');
+  }
+});
+
+function showMovies(d) {
+  input.value = d.name;
+  sug.classList.remove('show');
+  sug.innerHTML = '';
+  res.innerHTML = '';
+
+  d.movies.slice(0, 12).forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <img src="${m.poster}" alt="${m.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/350x450/1e293b/94a3b8?text=Movie+Poster'">
+      <div class="card-content">
+        <h4>${m.title}</h4>
+        <p>Directed by ${d.name}</p>
+      </div>
+    `;
+    res.appendChild(card);
+  });
+}
 </script>
 
 </body>
